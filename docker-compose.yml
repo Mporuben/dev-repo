@@ -1,0 +1,43 @@
+version: '3.2'
+services:
+  web:
+    container_name: web
+    depends_on:
+      - "web-api"
+    ports:
+      - '3030:3030'
+    image: ghcr.io/mporuben/web:latest
+    command: npm run dev
+
+  web-api:
+    container_name: web-api
+    image: ghcr.io/mporuben/web-api:latest
+    depends_on:
+      - "db"
+    environment:
+      # DB
+      DATABASE_HOST: 'gateway.docker.internal'
+      DATABASE_PORT: '5432'
+      DATABASE_NAME: 'main'
+      DATABASE_USER: 'postgres'
+      DATABASE_PASSWORD: 'root'
+    ports:
+      - '3000:3000'
+    command: npm run start:prod
+
+  db:
+    container_name: web-db
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 'root'
+      POSTGRES_DB: 'main'
+    ports:
+      - '5432:5432'
+    expose:
+      - '5432'
+    volumes:
+      - web-db:/var/lib/postgres:delegated
+
+volumes:
+  web-db:

@@ -1,0 +1,3 @@
+/apps/*/
+docker-compose.override.yml
+.idea
