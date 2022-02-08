@@ -1,6 +1,8 @@
 # Docker development repo
-This repo is example for my article.
-[Article link](matthewporuben.com/blog/building-development-repo)
+This is development repo based on Docker.
+It serves as functional example for article.
+
+[Article link](http://www.matthewporuben.com/blog/building-development-repo)
 
 ## Setup 
 ```bash
